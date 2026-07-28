@@ -10,7 +10,7 @@ This project investigates the reliability of published equity-return "anomalies"
 
 *Notebook: `anomly_decay.ipynb`*
 
-Part 1 is an **inspiration** from the famous McLean & Pontiff (2016) result which found out that academic publication erodes return predictability. This project applies that question to a broad set of 138 anomalies, processed independently from the raw OSAP data, using per-signal sample-end splits and conditional significance testing.
+Part 1 builds on the famous McLean & Pontiff (2016) result which found out that academic publication erodes return predictability. This project applies that question to a broad set of 138 anomalies, processed independently from the raw OSAP data, using per-signal sample-end splits and conditional significance testing.
  
 Using the [Open Source Asset Pricing](https://www.openassetpricing.com/) (OSAP) database of Chen & Zimmermann, I took 138 high-quality published anomalies, split each at the end of *its own original study's sample period*, and compared performance in-sample vs. out-of-sample. The split is drawn at each signal's `SampleEndYear` because the returns after the original data ended are the first ones nobody had seen when the anomaly was formed, and therefore the honest test.
 
@@ -23,7 +23,7 @@ Using the [Open Source Asset Pricing](https://www.openassetpricing.com/) (OSAP) 
 
 *Each point is one anomaly, plotted by its Newey-West t-statistic during vs. after its original study. Points below the diagonal weakened out-of-sample — most did. The survivor quadrant (upper-right, significant on both axes) is sparse.*
 
-This replicates, on independently processed data, the central result of McLean & Pontiff (2016): published predictability tends to erode once a pattern is public, consistent with arbitrage capital flowing toward it. The practical takeaway — an impressive in-sample t-stat is a weak promise about the future; a published edge is best treated as an upper bound on what remains.
+This replicates, on independently processed data, the central result of McLean & Pontiff (2016): published predictability tends to erode once a pattern is public, consistent with arbitrage capital flowing toward it. What I practically understood was that in-sample t-stat is a weak promise about the future; a published edge is best treated as an upper bound on what remains.
 
 ---
 
@@ -46,9 +46,7 @@ Building from free data surfaced exactly the messiness that professional databas
 
 ---
 
-## Approach and challenges
-
-Approach and key decisions
+## Approach 
 
 Splitting at sample-end, not publication. Each anomaly is tested out-of-sample by splitting its return series at the last year of the original study's data (SampleEndYear), not the publication year. Papers typically publish 2–4 years after their sample ends, so splitting at publication would misclassify genuinely-unseen returns as in-sample. This choice is what makes the out-of-sample period a true test.
 
@@ -62,7 +60,6 @@ Decomposing the benchmark gap. My homemade momentum earns ~5% annualized vs the 
 
 ## Honest limitations
 
-- Part 1 is an **inspiration** from the famous McLean & Pontiff (2016) result which found out that academic publication erodes return predictability. This project applies that question to a broad set of 138 anomalies, processed independently from the raw OSAP data, using per-signal sample-end splits and conditional significance testing.
 - The out-of-sample windows for recently-published anomalies are short, making their t-statistics noisier than long-history signals'.
 - OSAP's standardized decile construction differs from each study's exact methodology, so a portion of measured decay may reflect construction rather than pure erosion.
 - The momentum universe is large-cap and survivor-only; the gap versus the benchmark reflects weighting, universe, and survivorship combined, which free data cannot fully separate.
